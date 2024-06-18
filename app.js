@@ -3,6 +3,8 @@ import fetch from 'node-fetch';
 
 const app = express();
 
+app.use(express.static('views'));
+app.use(express.static('public'));
 app.get('/random-character', async (req, res) => {
 	try {
 		const response = await fetch(
