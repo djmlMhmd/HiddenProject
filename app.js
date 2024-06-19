@@ -1,7 +1,18 @@
 import express from 'express';
 import fetch from 'node-fetch';
+import dotenv from 'dotenv';
+import http from 'http'; // Assure-toi d'importer 'http' si tu l'utilises pour créer un serveur
+import { logLogger } from './config/winston/winston.config.js'; // Assure-toi que le chemin est correct et utilise l'extension .js si nécessaire
+
+dotenv.config();
 
 const app = express();
+const server = http.createServer(app);
+const port = process.env.PORT || 3000;
+import databaseConfig from './config/databaseConfig.js';
+
+// Initialize database tables
+databaseConfig.init();
 
 app.use(express.static('views'));
 app.use(express.static('public'));
@@ -19,5 +30,6 @@ app.get('/random-character', async (req, res) => {
 	}
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+server.listen(port, () => {
+	logLogger(`App listening on port ${port}`, 'App');
+});

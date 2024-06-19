@@ -78,7 +78,7 @@ function generateHints(userInput) {
 
 	// Indice sur l'âge
 	if (currentCharacter.age) {
-		hints.push(`Âge: ${currentCharacter.age} ans`);
+		hints.push(`Âge: ${currentCharacter.age}`);
 	}
 
 	feedback.innerHTML = `Non, ce n'est pas ${userInput}. <br>Indices:<br> ${hints.join(
